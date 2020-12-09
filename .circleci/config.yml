@@ -1,0 +1,94 @@
+# https://circleci.com/docs/2.1/language-python/
+version: 2.1
+
+# ------------------
+# Reusable executors
+# ------------------
+
+executors:
+
+  standard:
+    docker:
+      - image: circleci/python:3.7.6
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+    working_directory: "~/lib"
+
+
+# -----------------
+# Reusable commands
+# -----------------
+
+commands:
+
+  install_venv:
+    steps:
+      - restore_cache:
+          keys:
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-
+      - run:
+          name: Install Python packages
+          command: make sync
+      - save_cache:
+          key: virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - "./.venv"
+
+
+# --------------
+# Pipeline tasks
+# --------------
+
+jobs:
+
+  lint:
+    executor: standard
+    steps:
+      - checkout
+      - install_venv
+      - run:
+          name: Run Python linter
+          command: make lint
+
+  test:
+    executor: standard
+    steps:
+      - checkout
+      - install_venv
+      - run:
+          name: Run Python tests
+          command: make test
+      - store_test_results:
+          path: "."
+
+  build:
+    executor: standard
+    steps:
+      - checkout
+      - install_venv
+      - run:
+          name: Build wheel
+          command: make package
+      - store_artifacts:
+          path: dist
+          destination: wheel
+
+
+# -----------------
+# Pipeline workflow
+# -----------------
+
+workflows:
+
+  version: 2
+
+  lint-test-build:
+    jobs:
+      - lint
+      - test
+      - build:
+          requires:
+            - lint
+            - test
