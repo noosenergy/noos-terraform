@@ -1,4 +1,4 @@
-from terraform_client.base import auth_client
+from noos_tf.base import auth_client
 
 
 class TestCredentials:
