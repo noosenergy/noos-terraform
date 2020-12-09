@@ -4,6 +4,10 @@ from . import client
 RUN_URL_TEMPLATE = "https://app.terraform.io/app/{organization}/workspaces/{workspace}/runs/{id}"
 
 
+class TerraformError(Exception):
+    """Basic exception raised by a Terraform request."""
+
+
 def update_workspace_variable(
     organization: str,
     workspace: str,
@@ -19,6 +23,8 @@ def update_workspace_variable(
     tf_vars = tf_client.get_variable_ids(organization, workspace)
 
     # Update variable with the new value
+    if variable not in tf_vars:
+        raise TerraformError("Unknown variable in the workspace")
     tf_client.update_variable(tf_vars[variable], value)
 
 
