@@ -3,7 +3,7 @@ import random
 import pytest
 import requests
 
-from terraform_client.base import http_client
+from noos_tf.base import http_client
 
 
 @pytest.fixture

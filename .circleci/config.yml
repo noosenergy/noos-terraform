@@ -25,14 +25,14 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+            - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
             - virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-
             - virtualenv-{{ .Environment.CACHE_VERSION }}-
       - run:
           name: Install Python packages
-          command: make sync
+          command: poetry install
       - save_cache:
-          key: virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          key: virtualenv-{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "poetry.lock" }}
           paths:
             - "./.venv"
 
@@ -75,6 +75,15 @@ jobs:
           path: dist
           destination: wheel
 
+  publish:
+    executor: standard
+    steps:
+      - checkout
+      - install_venv
+      - run:
+          name: Publish wheel
+          command: make release
+
 
 # -----------------
 # Pipeline workflow
@@ -92,3 +101,23 @@ workflows:
           requires:
             - lint
             - test
+
+  publish:
+    jobs:
+      - approve-for-publishing:
+          type: approval
+          filters:
+            tags:
+              # ONLY git tag compliant format: e.g. `0.0.1-alpha.01`
+              only: /[0-9]+(\.[0-9]+)*(-alpha\.[0-9]+)?/
+            branches:
+              ignore: /.*/
+      - publish:
+          context: CIRCLECI_PYPI_SHARED
+          requires:
+            - approve-for-publishing
+          filters:
+            tags:
+              only: /[0-9]+(\.[0-9]+)*(-alpha\.[0-9]+)?/
+            branches:
+              ignore: /.*/
