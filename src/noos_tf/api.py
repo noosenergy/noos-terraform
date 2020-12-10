@@ -1,6 +1,9 @@
 from . import client
 
 
+__all__ = ["update_workspace_variable", "run_workspace_plan"]
+
+
 RUN_URL_TEMPLATE = "https://app.terraform.io/app/{organization}/workspaces/{workspace}/runs/{id}"
 
 
@@ -15,6 +18,7 @@ def update_workspace_variable(
     variable: str,
     value: str,
 ) -> None:
+    """Update variable in Terraform cloud."""
     # Authenticate client
     tf_client = client.TerraformClient()
     tf_client.set_auth_header(token)
@@ -28,14 +32,15 @@ def update_workspace_variable(
     tf_client.update_variable(tf_vars[variable], value)
 
 
-def create_workspace_run(organization: str, workspace: str, token: str, message: str) -> str:
+def run_workspace_plan(organization: str, workspace: str, token: str, message: str) -> str:
+    """Run a plan in Terraform cloud."""
     # Authenticate client
     tf_client = client.TerraformClient()
     tf_client.set_auth_header(token)
 
-    # Retrieve workspace ID and vairables IDs
+    # Retrieve workspace ID
     workspace_id = tf_client.get_workspace_id(organization, workspace)
 
     # Create and apply a new plan
-    run_id = tf_client.create_run(workspace_id, message)
+    run_id = tf_client.run_plan(workspace_id, message)
     return RUN_URL_TEMPLATE.format(organization=organization, workspace=workspace, id=run_id)
