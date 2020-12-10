@@ -52,8 +52,8 @@ class TerraformClient(auth_client.AuthClient):
             statuses=(http_client.OK,),
         )
 
-    def create_run(self, workspace_id: str, message: str) -> str:
-        """Create and apply a new plan onto a given workspace for a organization."""
+    def run_plan(self, workspace_id: str, message: str) -> str:
+        """Run a plan onto a given workspace for a organization."""
         data = {
             "data": {
                 "type": "runs",
