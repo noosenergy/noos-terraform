@@ -5,6 +5,9 @@ from typing import Dict
 from .base import auth_client
 
 
+__all__ = ["TerraformClient"]
+
+
 class TerraformAuth(auth_client.HTTPTokenAuth):
     default_header = "Authorization"
     default_value = "Bearer"

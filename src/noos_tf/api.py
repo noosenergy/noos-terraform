@@ -1,6 +1,9 @@
 from . import client
 
 
+__all__ = ["update_workspace_variable", "run_workspace_plan"]
+
+
 RUN_URL_TEMPLATE = "https://app.terraform.io/app/{organization}/workspaces/{workspace}/runs/{id}"
 
 
