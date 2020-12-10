@@ -8,3 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - Initial release.
  - Add Python wrapper around Terraform Cloud API.
+
+## [0.0.2] - 2020-12-10
+### Added
+ - Expose the Terraform client directly to the command line.
