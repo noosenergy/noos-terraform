@@ -64,7 +64,7 @@ noos_tf.run_workspace_plan(
 
 The above helper functions could be accessed directly from the command line.
 
-```shell
+```
 $ noostf
 
 Usage: noostf [--core-opts] <subcommand> [--subcommand-opts] ...
@@ -83,7 +83,7 @@ On Mac OSX, make sure [poetry](https://python-poetry.org/) has been installed an
 
 This project is shipped with a Makefile, which is ready to do basic common tasks.
 
-```shell
+```
 $ make
 
 help                           Display this auto-generated help message

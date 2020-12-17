@@ -12,3 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.2] - 2020-12-10
 ### Added
  - Expose the Terraform client directly to the command line.
+
+## [0.0.3] - 2020-12-17
+### Added
+ - Generally improved project test coverage.
