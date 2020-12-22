@@ -2,26 +2,26 @@
 from http import client as http_client
 from typing import Dict
 
-from .base import auth_client
+from noos_pyk.clients import auth, json
 
 
 __all__ = ["TerraformClient"]
 
 
-class TerraformAuth(auth_client.HTTPTokenAuth):
+class TerraformAuth(auth.HTTPTokenAuth):
     default_header = "Authorization"
     default_value = "Bearer"
 
 
-class TerraformClient(auth_client.AuthClient):
+class TerraformClient(json.JSONClient, auth.AuthClient):
     default_base_url = "https://app.terraform.io/api/"
+    default_content_type = "application/vnd.api+json"
 
-    default_headers = {"Content-Type": "application/vnd.api+json"}
     default_auth_class = TerraformAuth
 
     def get_workspace_id(self, organization: str, workspace: str) -> str:
         """Get the ID of a given workspace for a organization."""
-        response = self._get(
+        response = self.get(
             path=f"v2/organizations/{organization}/workspaces/{workspace}",
             statuses=(http_client.OK,),
         )
@@ -33,7 +33,7 @@ class TerraformClient(auth_client.AuthClient):
             "filter[organization][name]": organization,
             "filter[workspace][name]": workspace,
         }
-        response = self._get(
+        response = self.get(
             path="v2/vars",
             params=params,
             statuses=(http_client.OK,),
@@ -49,7 +49,7 @@ class TerraformClient(auth_client.AuthClient):
                 "attributes": {"value": value},
             }
         }
-        self._patch(
+        self.patch(
             path=f"v2/vars/{variable_id}",
             data=data,
             statuses=(http_client.OK,),
@@ -66,7 +66,7 @@ class TerraformClient(auth_client.AuthClient):
                 },
             }
         }
-        response = self._post(
+        response = self.post(
             path="v2/runs",
             data=data,
             statuses=(http_client.CREATED,),
