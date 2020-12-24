@@ -302,7 +302,7 @@ description = "A simple, yet useful Python toolkit"
 name = "noos-pyk"
 optional = false
 python-versions = ">=3.7,<4.0"
-version = "0.0.1"
+version = "0.0.2"
 
 [package.dependencies]
 requests = "*"
@@ -768,8 +768,8 @@ mypy-extensions = [
     {file = "mypy_extensions-0.4.3.tar.gz", hash = "sha256:2d82818f5bb3e369420cb3c4060a7970edba416647068eb4c5343488a6c604a8"},
 ]
 noos-pyk = [
-    {file = "noos-pyk-0.0.1.tar.gz", hash = "sha256:67bebcdc52be38fa9ce002b6268167ba1e17adc8d9b7dbefdd3466bcba16ee9a"},
-    {file = "noos_pyk-0.0.1-py3-none-any.whl", hash = "sha256:bd5da5f4b9c4ea57126ba1d297d9d7aa5820890c375b9af4b6024daa25041c6e"},
+    {file = "noos-pyk-0.0.2.tar.gz", hash = "sha256:4b61f3cc4c1550e4ea219253fe72862b77a14ca919e573e941c11c780bfdf286"},
+    {file = "noos_pyk-0.0.2-py3-none-any.whl", hash = "sha256:0d0c80fd0b3db9aff26186e024269b8b6c94074f383900e4bef66e506465f6ee"},
 ]
 packaging = [
     {file = "packaging-20.8-py2.py3-none-any.whl", hash = "sha256:24e0da08660a87484d1602c30bb4902d74816b6985b93de36926f5bc95741858"},
