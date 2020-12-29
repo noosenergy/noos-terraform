@@ -32,7 +32,6 @@ noostf = "noos_tf.cli:main.run"
 [tool.poetry.dependencies]
 python = "^3.7"
 invoke = "*"
-requests = "*"
 noos-pyk = "*"
 
 [tool.poetry.dev-dependencies]
