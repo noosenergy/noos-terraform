@@ -16,3 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.3] - 2020-12-17
 ### Added
  - Generally improved project test coverage.
+
+## [0.0.4] - 2020-12-31
+### Added
+ - Rely onto `noos-pyk` package for base REST clients.
+### Changed
+ - Align project boilerplate with Noos conventions.
