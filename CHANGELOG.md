@@ -22,3 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Rely onto `noos-pyk` package for base REST clients.
 ### Changed
  - Align project boilerplate with Noos conventions.
+
+## [0.0.5] - 2021-01-05
+### Changed
+ - Bump `noos-pyk` dependency version to v0.0.4.
+ - Enforce API+JSON client payload content type.
