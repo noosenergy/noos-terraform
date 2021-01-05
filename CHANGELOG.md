@@ -27,3 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
  - Bump `noos-pyk` dependency version to v0.0.4.
  - Enforce API+JSON client payload content type.
+
+## [0.0.6] - 2021-01-05
+### Changed
+ - Bump Python version to v3.8.6.
