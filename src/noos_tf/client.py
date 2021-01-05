@@ -1,6 +1,6 @@
 # https://www.terraform.io/docs/cloud/api/index.html
 from http import client as http_client
-from typing import Dict
+from typing import Dict, Optional
 
 from noos_pyk.clients import auth, json
 
@@ -18,6 +18,17 @@ class TerraformClient(json.JSONClient, auth.AuthClient):
     default_content_type = "application/vnd.api+json"
 
     default_auth_class = TerraformAuth
+
+    def __init__(
+        self,
+        base_url: Optional[str] = None,
+        default_timeout: Optional[float] = None,
+    ) -> None:
+        super().__init__(
+            base_url=base_url,
+            default_timeout=default_timeout,
+            default_headers={"Content-Type": self.default_content_type},
+        )
 
     def get_workspace_id(self, organization: str, workspace: str) -> str:
         """Get the ID of a given workspace for a organization."""

@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from noos_tf import client
 
@@ -7,7 +8,7 @@ from noos_tf import client
 def mocked_request(mocker):
     mocker.patch.object(client.TerraformClient, "_check")
     mocker.patch.object(client.TerraformClient, "_deserialize")
-    return mocker.patch.object(client.TerraformClient, "_send")
+    return mocker.patch.object(requests.Session, "request")
 
 
 @pytest.fixture
@@ -26,7 +27,7 @@ def test_get_workspace_id_endpoint(tf_client, mocked_request):
     assert args[1] == (
         "http://localhost/v2/organizations/test_organisation/workspaces/test_workspace"
     )
-    assert kwargs["data"] is None
+    assert kwargs["json"] is None
     assert kwargs["params"] is None
 
 
@@ -39,7 +40,7 @@ def test_get_variable_ids_endpoint(tf_client, mocked_request):
 
     assert args[0] == "GET"
     assert args[1] == "http://localhost/v2/vars"
-    assert kwargs["data"] is None
+    assert kwargs["json"] is None
     assert kwargs["params"] == {
         "filter[organization][name]": "test_organisation",
         "filter[workspace][name]": "test_workspace",
@@ -55,7 +56,8 @@ def test_update_variable_endpoint(tf_client, mocked_request):
 
     assert args[0] == "PATCH"
     assert args[1] == "http://localhost/v2/vars/var-id"
-    assert kwargs["data"] == {
+    assert kwargs["headers"]["Content-Type"] == "application/vnd.api+json"
+    assert kwargs["json"] == {
         "data": {"type": "vars", "id": "var-id", "attributes": {"value": "new_value"}}
     }
     assert kwargs["params"] is None
@@ -70,7 +72,8 @@ def test_run_plan_endpoint(tf_client, mocked_request):
 
     assert args[0] == "POST"
     assert args[1] == "http://localhost/v2/runs"
-    assert kwargs["data"] == {
+    assert kwargs["headers"]["Content-Type"] == "application/vnd.api+json"
+    assert kwargs["json"] == {
         "data": {
             "type": "runs",
             "attributes": {"is-destroy": False, "message": "msg"},
