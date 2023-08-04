@@ -2,7 +2,7 @@
 # http://docs.pyinvoke.org/en/stable/concepts/library.html
 import os
 
-from invoke import Collection, Program, task
+from invoke import Collection, Program, Task, task
 
 from . import __version__, api
 
@@ -30,8 +30,8 @@ def run(ctx, message="", workspace="", organisation=None, token=None):
 
 
 ns = Collection()
-ns.add_task(update)
-ns.add_task(run)
+ns.add_task(Task(update))
+ns.add_task(Task(run))
 
 
 main = Program(namespace=ns, version=__version__)
