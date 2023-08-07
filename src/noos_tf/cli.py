@@ -2,7 +2,7 @@
 # http://docs.pyinvoke.org/en/stable/concepts/library.html
 import os
 
-from invoke import Collection, Program, Task, task
+from invoke import Collection, Program, task
 
 from . import __version__, api
 
@@ -30,8 +30,9 @@ def run(ctx, message="", workspace="", organisation=None, token=None):
 
 
 ns = Collection()
-ns.add_task(Task(update))
-ns.add_task(Task(run))
+ns.add_task(update)  # type: ignore
+ns.add_task(run)  # type: ignore
+# TODO wrong type in task decorator: https://github.com/pyinvoke/invoke/issues/946
 
 
 main = Program(namespace=ns, version=__version__)
