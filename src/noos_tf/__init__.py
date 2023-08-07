@@ -1,7 +1,9 @@
 """A Python client wrapping up HashiCorp's Terraform Cloud API."""
 
+from importlib import metadata
+
 from .api import *  # noqa
 from .client import *  # noqa
 
 
-__version__ = "0.0.6"
+__version__ = metadata.version("noos-tf")

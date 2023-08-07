@@ -30,8 +30,9 @@ def run(ctx, message="", workspace="", organisation=None, token=None):
 
 
 ns = Collection()
-ns.add_task(update)
-ns.add_task(run)
+ns.add_task(update)  # type: ignore
+ns.add_task(run)  # type: ignore
+# TODO wrong type in task decorator: https://github.com/pyinvoke/invoke/issues/946
 
 
 main = Program(namespace=ns, version=__version__)

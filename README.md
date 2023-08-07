@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/noosenergy/noos-terraform.svg?style=svg&circle-token=5d70bf41e76bbad2a187da8db5c0c39f691db452)](https://circleci.com/gh/noosenergy/noos-terraform)
+[![CircleCI](https://circleci.com/gh/noosenergy/noos-terraform.svg?style=svg&circle-token=eec3000121ab0ce0659e9c0b2c09347a6e3cd000)](https://circleci.com/gh/noosenergy/noos-terraform)
 
 # Noos Energy Terraform Client
 

@@ -31,3 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.6] - 2021-01-05
 ### Changed
  - Bump Python version to v3.8.6.
+
+## [0.0.7] - 2023-08-04
+### Changed
+ - Bump Python version to v3.11.4.
