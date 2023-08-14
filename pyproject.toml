@@ -37,7 +37,7 @@ noos-pyk = "*"
 [tool.poetry.dev-dependencies]
 # Format
 isort = "*"
-black = {version = "*", allow-prereleases = true}
+black = "*"
 # Linter
 pydocstyle = "*"
 flake8 = "*"
@@ -80,7 +80,7 @@ python_functions = "test_*"
 filterwarnings = "error::RuntimeWarning"
 pythonpath = ["src"]
 junit_family = "xunit2"
-addopts = "--junitxml=pytest.xml"
+addopts = "--junitxml=.pytest_results/junit.xml"
 
 [tool.coverage.run]
 source = "noos_tf/*"
