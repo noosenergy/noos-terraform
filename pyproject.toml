@@ -37,7 +37,7 @@ noos-pyk = "*"
 [tool.poetry.dev-dependencies]
 # Format
 isort = "*"
-black = {version = "*", allow-prereleases = true}
+black = {version = "*"}
 # Linter
 pydocstyle = "*"
 flake8 = "*"

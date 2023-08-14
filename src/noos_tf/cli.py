@@ -7,7 +7,7 @@ from invoke import Collection, Program, task
 from . import __version__, api
 
 
-@task
+@task()
 def update(ctx, variable="", value="", workspace="", organisation=None, token=None):
     """Update variable in Terraform cloud."""
     organisation = organisation or os.getenv("TERRAFORM_USER")
@@ -18,7 +18,7 @@ def update(ctx, variable="", value="", workspace="", organisation=None, token=No
     print(f"Updated Terraform {variable} for {workspace}")
 
 
-@task
+@task()
 def run(ctx, message="", workspace="", organisation=None, token=None):
     """Run a plan in Terraform cloud."""
     organisation = organisation or os.getenv("TERRAFORM_USER")
@@ -30,9 +30,8 @@ def run(ctx, message="", workspace="", organisation=None, token=None):
 
 
 ns = Collection()
-ns.add_task(update)  # type: ignore
-ns.add_task(run)  # type: ignore
-# TODO wrong type in task decorator: https://github.com/pyinvoke/invoke/issues/946
+ns.add_task(update)
+ns.add_task(run)
 
 
 main = Program(namespace=ns, version=__version__)
