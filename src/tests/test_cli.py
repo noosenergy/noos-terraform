@@ -5,7 +5,7 @@ from noos_tf import cli
 
 
 @pytest.fixture
-def ctx():
+def ctx() -> context.Context:
     return context.Context()
 
 
@@ -15,7 +15,7 @@ def ctx():
         ("test_organisation", None),
     ]
 )
-def secrets(request):
+def secrets(request) -> tuple[str | None, ...]:
     return request.param
 
 
