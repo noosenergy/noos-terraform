@@ -1,3 +1,5 @@
+from unittest import mock
+
 import pytest
 import requests
 
@@ -5,14 +7,14 @@ from noos_tf import client
 
 
 @pytest.fixture
-def mocked_request(mocker):
+def mocked_request(mocker) -> mock.Mock:
     mocker.patch.object(client.TerraformClient, "_check")
     mocker.patch.object(client.TerraformClient, "_deserialize")
     return mocker.patch.object(requests.Session, "request")
 
 
 @pytest.fixture
-def tf_client():
+def tf_client() -> client.TerraformClient:
     return client.TerraformClient(base_url="http://localhost/")
 
 

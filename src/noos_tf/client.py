@@ -1,6 +1,5 @@
 # https://www.terraform.io/docs/cloud/api/index.html
 from http import client as http_client
-from typing import Dict, Optional
 
 from noos_pyk.clients import auth, json
 
@@ -21,8 +20,8 @@ class TerraformClient(json.JSONClient, auth.AuthClient):
 
     def __init__(
         self,
-        base_url: Optional[str] = None,
-        default_timeout: Optional[float] = None,
+        base_url: str | None = None,
+        default_timeout: float | None = None,
     ) -> None:
         super().__init__(
             base_url=base_url,
@@ -38,7 +37,7 @@ class TerraformClient(json.JSONClient, auth.AuthClient):
         )
         return response["data"]["id"]
 
-    def get_variable_ids(self, organization: str, workspace: str) -> Dict[str, str]:
+    def get_variable_ids(self, organization: str, workspace: str) -> dict[str, str]:
         """Get variable IDs stored onto a given workspace for a organization."""
         params = {
             "filter[organization][name]": organization,

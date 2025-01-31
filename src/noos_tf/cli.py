@@ -8,7 +8,14 @@ from . import __version__, api
 
 
 @task()
-def update(ctx, variable="", value="", workspace="", organisation=None, token=None):
+def update(
+    ctx,
+    variable: str = "",
+    value: str = "",
+    workspace: str = "",
+    organisation: str | None = None,
+    token: str | None = None,
+) -> None:
     """Update variable in Terraform cloud."""
     organisation = organisation or os.getenv("TERRAFORM_USER")
     token = token or os.getenv("TERRAFORM_TOKEN")
@@ -19,7 +26,13 @@ def update(ctx, variable="", value="", workspace="", organisation=None, token=No
 
 
 @task()
-def run(ctx, message="", workspace="", organisation=None, token=None):
+def run(
+    ctx,
+    message: str = "",
+    workspace: str = "",
+    organisation: str | None = None,
+    token: str | None = None,
+) -> None:
     """Run a plan in Terraform cloud."""
     organisation = organisation or os.getenv("TERRAFORM_USER")
     token = token or os.getenv("TERRAFORM_TOKEN")
