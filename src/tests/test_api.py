@@ -26,8 +26,7 @@ class TestUpdateWorkspaceVariable:
 class TestRunWorkspacePlan:
     def test_return_correctly_formatted_plan_url(self, mocker):
         expected_url = (
-            "https://app.terraform.io/app/test_organization/"
-            "workspaces/test_workspace/runs/run-id"
+            "https://app.terraform.io/app/test_organization/workspaces/test_workspace/runs/run-id"
         )
         mocker.patch.object(client.TerraformClient, "get_workspace_id", return_value="wkr-id")
         mocked_run = mocker.patch.object(client.TerraformClient, "run_plan", return_value="run-id")
