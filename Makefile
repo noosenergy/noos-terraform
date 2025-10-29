@@ -42,8 +42,8 @@ test:  ## Run pytest with all tests
 package:  ## Build project wheel distribution
 	uv build
 
-release:  ## Publish wheel distribution to PyPi
+release: package  ## Publish wheel distribution to PyPi
 	uv publish -t ${PYPI_TOKEN}
 
-test_release:
+test_release: package
 	uv publish -t ${PYPI_TOKEN} --publish-url "https://test.pypi.org/legacy/"
