@@ -77,7 +77,7 @@ Subcommands:
 
 ### Development
 
-Make sure [poetry](https://python-poetry.org/) has been installed and pre-configured,
+Make sure [uv](https://docs.astral.sh/uv/) has been installed and pre-configured,
 
 This project is shipped with a Makefile, which is ready to do basic common tasks.
 
